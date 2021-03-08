@@ -1,0 +1,165 @@
+package DSA;
+class Stack {
+    
+    private int top; 
+    private int maxSize; 
+    private int[] arr;
+
+    Stack(int maxSize) {
+        this.top = -1; 
+        this.maxSize = maxSize;
+        arr = new int[maxSize];
+    }
+
+    public boolean isFull() {
+        if (top >= (maxSize - 1)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean push(int data) {
+        if (isFull()) {
+            return false;
+        }
+        else {
+            arr[++top] = data;
+            return true;
+        }
+    }
+
+    public int peek() {
+        if (isEmpty())
+            return Integer.MIN_VALUE;
+        else
+            return arr[top];
+    }
+
+    public void display() {
+        if (isEmpty())
+            System.out.println("Stack is empty!");
+        else {
+            System.out.println("Displaying stack elements");
+            for (int index = top; index >= 0; index--) {
+                System.out.print(" " + arr[index] + " "); // accessing element at position index
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        if (top < 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public int pop() {
+        if (isEmpty())
+            return Integer.MIN_VALUE;
+        else
+            return arr[top--];
+    }
+}
+
+class Queue {
+    
+    private int front;
+    private int rear;
+    private int maxSize;
+    private int arr[];
+      
+    Queue(int maxSize) {
+        this.front = 0;
+        this.rear = -1;
+        this.maxSize = maxSize;
+        this.arr = new int[this.maxSize];
+    }
+      
+    public boolean isFull() {
+        if (rear == maxSize - 1) {
+            return true;
+        }
+        return false;
+    }
+            
+    public boolean enqueue(int data) {
+        if (isFull()) {
+            return false;
+        } else {
+            arr[++rear] = data;
+            return true;
+        }
+    }
+
+    public void display() {
+        if(isEmpty())
+            System.out.println("Queue is empty!");
+        else {
+            for (int index = front; index <= rear; index++) {
+                System.out.print(arr[index]+ " ");
+            }
+        }
+    }
+            
+    public boolean isEmpty() {
+        if (front > rear)
+            return true;
+        return false;
+    }
+            
+    public int dequeue() {
+        if (isEmpty()) {
+            return Integer.MIN_VALUE;
+        } else {
+            int data = arr[this.front];
+            arr[front++] = Integer.MIN_VALUE;
+            return data;
+        }
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+}
+
+
+class Tester {
+	public static void main(String[] args) {
+    	
+    	Stack s = new Stack(8);
+    	s.push(18);
+    	s.push(7);
+    	s.push(8);
+    	s.push(15);
+    	s.push(12); 
+    	s.push(3);
+    	s.push(10);
+    	s.push(16);
+    	sorting(s);
+    	
+
+    }
+      
+    public static void sorting(Stack s) {
+    	Stack s2 = new Stack(8);
+    	s2.push(s.pop());
+    	while(!s.isEmpty()) {
+    		int temp = s.pop();
+    		if(temp<s2.peek()) {
+    			s2.push(temp);
+    		}
+    		else {
+    			while(s2.peek()<temp) {
+    				s.push(s2.pop());
+    				if(s2.isEmpty() == true){
+            break;
+            }
+    				}
+    			s2.push(temp);
+    		}
+        }
+    	s2.display();
+    }
+}
+    
+
