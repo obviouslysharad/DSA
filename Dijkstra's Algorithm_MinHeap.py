@@ -28,6 +28,7 @@ graph = {
     'D' : {'E': 1, 'F': 3}, 
     'E' : {'D': 4, 'F': 4},
     'F' : {}
+    
 } 
 
 print(findMin(graph, 'A'))
